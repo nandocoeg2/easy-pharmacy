@@ -1,4 +1,3 @@
-import React from "react";
 import ProductGrid, { Product } from "../organisms/ProductGrid";
 
 interface DashboardTemplateProps {
