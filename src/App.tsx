@@ -3,10 +3,11 @@ import { Provider, useSelector } from "react-redux";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import { RootState, store } from "./stores/Store";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Cart from "./pages/Cart";
 import DrugDetail from "./pages/DrugDetail";
+import LoadingSpinner from "./components/atoms/LoadingSpinner";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(
@@ -31,26 +32,28 @@ function App() {
     <>
       <Provider store={store}>
         <Router>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/drug/:id"
-              element={
-                <ProtectedRoute>
-                  <DrugDetail />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/drug/:id"
+                element={
+                  <ProtectedRoute>
+                    <DrugDetail />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
         </Router>
       </Provider>
     </>

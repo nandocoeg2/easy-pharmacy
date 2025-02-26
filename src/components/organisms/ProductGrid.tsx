@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stores/Store";
-import ProductCard from "../molecules/ProductCart";
+import ProductCard from "../molecules/ProductCard";
 
 export interface Product {
   id: number;

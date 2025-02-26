@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../stores/Store";
 import Layout from "../components/Layout";
-import DashboardTemplate from "../components/templates/DashboardTemplate";
+import { DashboardTemplate } from "../components/templates";
 import { Loader } from "lucide-react";
 
 interface Obat {

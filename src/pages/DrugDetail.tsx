@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../stores/CartSlice";
 import Layout from "../components/Layout";
-import DrugDetailTemplate from "../components/templates/DrugDetailTemplate";
+import { DrugDetailTemplate } from "../components/templates";
 import { useNavigate, useParams } from "react-router";
 
 interface Obat {
