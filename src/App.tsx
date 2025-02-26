@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import { RootState, store } from "./stores/Store";
 import { ReactNode } from "react";
 import Navbar from "./components/Navbar";
+import Cart from "./pages/Cart";
+import DrugDetail from "./pages/DrugDetail";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(
@@ -18,6 +20,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
+      <Cart />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">{children}</main>
     </div>
   );
@@ -35,6 +38,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/drug/:id"
+              element={
+                <ProtectedRoute>
+                  <DrugDetail />
                 </ProtectedRoute>
               }
             />
