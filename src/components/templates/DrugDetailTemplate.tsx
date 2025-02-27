@@ -32,7 +32,7 @@ export default function DrugDetailTemplate({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <button
         onClick={onBack}
-        className="flex items-center text-gray-600 hover:text-gray-900 mb-8 transition-colors"
+        className="flex items-center text-gray-600 hover:text-gray-900 hover:font-medium mb-8 transition-colors cursor-pointer"
       >
         <ArrowLeft className="h-5 w-5 mr-2" />
         Back to Dashboard

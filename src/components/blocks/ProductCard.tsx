@@ -3,7 +3,7 @@ import { Banknote, ShoppingCart } from "lucide-react";
 import Button from "../uis/Button";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/CartSlice";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Badge from "../uis/Badge";
 
 interface ProductCardProps {
@@ -33,12 +33,14 @@ function ProductCard({
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-      <img
-        src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&q=80"
-        alt={name}
-        className="w-full h-48 object-cover rounded-t-lg"
-      />
+    <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg hover:drop-shadow-lg transition-shadow">
+      <Link to={`/drug/${id}`}>
+        <img
+          src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&q=80"
+          alt={name}
+          className="w-full h-48 object-cover rounded-t-lg"
+        />
+      </Link>
       <div className="p-6 space-y-4">
         <div className="flex items-start justify-between">
           <div>
@@ -48,7 +50,6 @@ function ProductCard({
         </div>
 
         <div className="space-y-3">
-          {/* <p className="text-sm text-gray-600 line-clamp-3">{des}</p> */}
           <Badge variant="warning">{des}</Badge>
           <div className="flex justify-between text-gray-700">
             <div className="flex items-center text-gray-700">

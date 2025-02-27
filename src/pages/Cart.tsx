@@ -8,9 +8,11 @@ import { X, Plus, Minus } from "lucide-react";
 import { RootState } from "../stores/Store";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import Dialog from "../components/uis/Dialog";
 
 export default function Cart() {
   const { items, isOpen } = useSelector((state: RootState) => state.cart);
+  const [itemToRemove, setItemToRemove] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,6 +35,13 @@ export default function Cart() {
       setIsProcessing(false);
       navigate("/checkout/success");
     }, 1500);
+  };
+
+  const handleRemoveConfirm = () => {
+    if (itemToRemove !== null) {
+      dispatch(removeFromCart(itemToRemove));
+      setItemToRemove(null);
+    }
   };
 
   return (
@@ -113,7 +122,7 @@ export default function Cart() {
 
                             <button
                               type="button"
-                              onClick={() => dispatch(removeFromCart(item.id))}
+                              onClick={() => setItemToRemove(item.id)}
                               className="font-medium text-indigo-600 hover:text-indigo-500"
                             >
                               Remove
@@ -191,6 +200,15 @@ export default function Cart() {
           </div>
         </div>
       </div>
+      <Dialog
+        isOpen={itemToRemove !== null}
+        onClose={() => setItemToRemove(null)}
+        onConfirm={handleRemoveConfirm}
+        title="Remove Item"
+        description="Are you sure you want to remove this item from your cart?"
+        confirmText="Remove"
+        cancelText="Cancel"
+      />
     </div>
   );
 }
