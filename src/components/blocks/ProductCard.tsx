@@ -4,6 +4,7 @@ import Button from "../uis/Button";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/CartSlice";
 import { useNavigate } from "react-router";
+import Badge from "../uis/Badge";
 
 interface ProductCardProps {
   id: number;
@@ -22,6 +23,7 @@ function ProductCard({
   description,
   image,
   des,
+  rate,
 }: ProductCardProps) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,12 +48,20 @@ function ProductCard({
         </div>
 
         <div className="space-y-3">
-          <p className="text-sm text-gray-600 line-clamp-3">{des}</p>
-          <div className="flex items-center text-gray-700">
-            <Banknote className="h-5 w-5 mr-1 text-gray-400" />
-            <span className="text-lg font-semibold text-green-600">
-              {price}
-            </span>
+          {/* <p className="text-sm text-gray-600 line-clamp-3">{des}</p> */}
+          <Badge variant="warning">{des}</Badge>
+          <div className="flex justify-between text-gray-700">
+            <div className="flex items-center text-gray-700">
+              <Banknote className="h-5 w-5 mr-1 text-gray-400" />
+              <span className="text-lg font-semibold text-green-600">
+                {price}
+              </span>
+            </div>
+            <div className="flex items-center text-gray-700">
+              <Badge variant="success">
+                {rate > 0 ? "In Stock" : "Out of Stock"}
+              </Badge>
+            </div>
           </div>
         </div>
 
