@@ -6,9 +6,11 @@ import { Link, useNavigate } from "react-router";
 import { logout } from "../../stores/AuthSlice";
 import { setSearchQuery } from "../../stores/SearchSlice";
 import { toggleCart } from "../../stores/CartSlice";
+import Dialog from "../uis/Dialog";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const user = useSelector((state: RootState) => state.auth.user);
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
@@ -107,7 +109,7 @@ export default function Navbar() {
             </div>
 
             <button
-              onClick={handleLogout}
+              onClick={() => setLogoutDialogOpen(true)}
               className="ml-2 px-3 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
             >
               <span className="hidden sm:inline">Logout</span>
@@ -189,6 +191,15 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      <Dialog
+        isOpen={logoutDialogOpen && isAuthenticated !== null}
+        onClose={() => setLogoutDialogOpen(false)}
+        onConfirm={handleLogout}
+        title="Logout Account"
+        description="Are you sure you want to logout?"
+        confirmText="Logout"
+        cancelText="Cancel"
+      />
     </nav>
   );
 }
