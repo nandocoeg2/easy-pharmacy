@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { CheckCircle, ArrowLeft, ShoppingBag } from "lucide-react";
-import Button from "../components/atoms/Button";
+import Button from "../components/uis/Button";
 import { useNavigate } from "react-router";
 import { clearCart } from "../stores/CartSlice";
 

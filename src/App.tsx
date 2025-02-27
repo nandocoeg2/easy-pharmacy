@@ -4,10 +4,10 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import { RootState, store } from "./stores/Store";
 import { ReactNode, Suspense } from "react";
-import Navbar from "./components/organisms/Navbar";
+import Navbar from "./components/sections/Navbar";
 import Cart from "./pages/Cart";
 import DrugDetail from "./pages/DrugDetail";
-import LoadingSpinner from "./components/atoms/LoadingSpinner";
+import LoadingSpinner from "./components/uis/LoadingSpinner";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {

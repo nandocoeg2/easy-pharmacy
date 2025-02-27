@@ -1,4 +1,4 @@
-import ProductGrid, { Product } from "../organisms/ProductGrid";
+import ProductGrid, { Product } from "../sections/ProductGrid";
 
 interface DashboardTemplateProps {
   userName: string;

@@ -1,5 +1,5 @@
 import { Search, X } from "lucide-react";
-import Input from "../atoms/Input";
+import Input from "../uis/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchQuery } from "../../stores/SearchSlice";
 import { RootState } from "../../stores/Store";

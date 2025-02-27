@@ -1,4 +1,4 @@
-import Button from "../atoms/Button";
+import Button from "../uis/Button";
 import {
   Package,
   Award,
@@ -7,7 +7,7 @@ import {
   ArrowLeft,
   Banknote,
 } from "lucide-react";
-import Badge from "../atoms/Badge";
+import Badge from "../uis/Badge";
 
 interface DrugDetailTemplateProps {
   drug: {

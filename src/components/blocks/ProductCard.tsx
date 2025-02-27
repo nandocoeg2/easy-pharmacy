@@ -1,6 +1,6 @@
 import React from "react";
 import { Banknote, ShoppingCart } from "lucide-react";
-import Button from "../atoms/Button";
+import Button from "../uis/Button";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/CartSlice";
 import { useNavigate } from "react-router";
