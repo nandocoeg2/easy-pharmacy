@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import DrugDetail from "./pages/DrugDetail";
 import LoadingSpinner from "./components/uis/LoadingSpinner";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
+import { Toaster } from "react-hot-toast";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(
@@ -34,6 +35,16 @@ function App() {
       <Provider store={store}>
         <Router>
           <Suspense fallback={<LoadingSpinner />}>
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                duration: 3000,
+                style: {
+                  background: "#363636",
+                  color: "#fff",
+                },
+              }}
+            />
             <Routes>
               <Route path="/" element={<Login />} />
               <Route

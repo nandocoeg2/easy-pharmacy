@@ -4,6 +4,7 @@ import { addToCart } from "../stores/CartSlice";
 import Layout from "../components/Layout";
 import { DrugDetailTemplate } from "../components/templates";
 import { useNavigate, useParams } from "react-router";
+import toast from "react-hot-toast";
 
 interface Obat {
   id: number;
@@ -60,6 +61,7 @@ export default function DrugDetail() {
           image: drug.image,
         })
       );
+      toast.success(`${drug.name} added to cart`);
     }
   };
 

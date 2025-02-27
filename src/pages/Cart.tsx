@@ -9,6 +9,7 @@ import { RootState } from "../stores/Store";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Dialog from "../components/uis/Dialog";
+import toast from "react-hot-toast";
 
 export default function Cart() {
   const { items, isOpen } = useSelector((state: RootState) => state.cart);
@@ -28,19 +29,30 @@ export default function Cart() {
     if (items.length === 0) return;
 
     setIsProcessing(true);
+    toast.loading("Processing your order...", {
+      id: "checkout",
+    });
 
     // Simulate checkout process
     setTimeout(() => {
       dispatch(toggleCart());
       setIsProcessing(false);
+      toast.success("Order placed successfully!", {
+        id: "checkout",
+      });
       navigate("/checkout/success");
     }, 1500);
   };
 
   const handleRemoveConfirm = () => {
     if (itemToRemove !== null) {
+      const itemName =
+        items.find((item) => item.id === itemToRemove)?.name || "Item";
       dispatch(removeFromCart(itemToRemove));
       setItemToRemove(null);
+      toast.success(`${itemName} removed from cart`, {
+        icon: "🗑️",
+      });
     }
   };
 

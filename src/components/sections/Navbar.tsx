@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LogOut, Search, Menu, ShoppingCart, X } from "lucide-react";
 import { RootState } from "../../stores/Store";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { logout } from "../../stores/AuthSlice";
 import { setSearchQuery } from "../../stores/SearchSlice";
 import { toggleCart } from "../../stores/CartSlice";
@@ -15,6 +15,7 @@ export default function Navbar() {
   );
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const searchQuery = useSelector((state: RootState) => state.search.query);
+  const isOnDashboard = window.location.pathname === "/dashboard";
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,34 +47,38 @@ export default function Navbar() {
                 <Menu className="h-6 w-6" />
               )}
             </button>
-            <span className="text-xl font-semibold text-gray-800 ml-2">
-              Dashboard
-            </span>
+            <Link to="/dashboard">
+              <span className="text-xl font-semibold text-gray-800 ml-2">
+                EasyPharmacy
+              </span>
+            </Link>
           </div>
 
           {/* Desktop right section */}
           <div className="hidden md:flex md:items-center md:space-x-4">
             {/* Search */}
-            <div className="relative w-64">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
+            {isOnDashboard && (
+              <div className="relative w-64">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+                  placeholder="Search products..."
+                  className="block w-full pl-10 pr-8 py-2 border border-gray-300 rounded-md text-sm"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => dispatch(setSearchQuery(""))}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  >
+                    <X className="h-4 w-4 text-gray-400 hover:text-gray-500" />
+                  </button>
+                )}
               </div>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => dispatch(setSearchQuery(e.target.value))}
-                placeholder="Search products..."
-                className="block w-full pl-10 pr-8 py-2 border border-gray-300 rounded-md text-sm"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => dispatch(setSearchQuery(""))}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                >
-                  <X className="h-4 w-4 text-gray-400 hover:text-gray-500" />
-                </button>
-              )}
-            </div>
+            )}
 
             {/* Cart button */}
             <button
@@ -131,28 +136,30 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-gray-200">
           {/* Mobile search */}
-          <div className="px-4 py-3">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
+          {isOnDashboard && (
+            <div className="px-4 py-3">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+                  placeholder="Search products..."
+                  className="block w-full pl-10 pr-8 py-2 border border-gray-300 rounded-md text-sm"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => dispatch(setSearchQuery(""))}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  >
+                    <X className="h-4 w-4 text-gray-400 hover:text-gray-500" />
+                  </button>
+                )}
               </div>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => dispatch(setSearchQuery(e.target.value))}
-                placeholder="Search products..."
-                className="block w-full pl-10 pr-8 py-2 border border-gray-300 rounded-md text-sm"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => dispatch(setSearchQuery(""))}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                >
-                  <X className="h-4 w-4 text-gray-400 hover:text-gray-500" />
-                </button>
-              )}
             </div>
-          </div>
+          )}
 
           {/* Mobile profile */}
           <div className="px-4 py-3 border-t border-gray-200">

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../stores/CartSlice";
 import { Link, useNavigate } from "react-router";
 import Badge from "../uis/Badge";
+import toast from "react-hot-toast";
 
 interface ProductCardProps {
   id: number;
@@ -30,6 +31,9 @@ function ProductCard({
 
   const handleAddToCart = () => {
     dispatch(addToCart({ id, name, price, image }));
+    toast.success(`${name} added to cart`, {
+      icon: "🛒",
+    });
   };
 
   return (
