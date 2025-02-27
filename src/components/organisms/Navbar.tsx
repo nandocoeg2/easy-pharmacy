@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../stores/Store";
-import { logout } from "../stores/AuthSlice";
+import { RootState } from "../../stores/Store";
+import { logout } from "../../stores/AuthSlice";
 import { LogOut, Search, ShoppingCart, X } from "lucide-react";
 import { Link, useNavigate } from "react-router";
-import { toggleCart } from "../stores/CartSlice";
-import { setSearchQuery } from "../stores/SearchSlice";
+import { toggleCart } from "../../stores/CartSlice";
+import { setSearchQuery } from "../../stores/SearchSlice";
 
 export default function Navbar() {
   const user = useSelector((state: RootState) => state.auth.user);
