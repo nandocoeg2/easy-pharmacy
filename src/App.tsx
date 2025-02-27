@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Cart from "./pages/Cart";
 import DrugDetail from "./pages/DrugDetail";
 import LoadingSpinner from "./components/atoms/LoadingSpinner";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(
@@ -48,6 +49,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <DrugDetail />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/checkout/success"
+                element={
+                  <ProtectedRoute>
+                    <CheckoutSuccess />
                   </ProtectedRoute>
                 }
               />
