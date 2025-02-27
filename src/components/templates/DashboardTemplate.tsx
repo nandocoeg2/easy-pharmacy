@@ -4,8 +4,6 @@ interface DashboardTemplateProps {
   userName: string;
   products: Product[];
   totalProducts: number;
-  averageRating: number;
-  totalValue: string;
 }
 
 export default function DashboardTemplate({

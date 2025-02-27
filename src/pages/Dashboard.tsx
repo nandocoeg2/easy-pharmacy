@@ -44,21 +44,6 @@ export default function Dashboard() {
     fetchObat();
   }, []);
 
-  const calculateAverageRating = () => {
-    if (obatList.length === 0) return 0;
-    const total = obatList.reduce((acc, obat) => acc + (obat.rate || 0), 0);
-    return Number((total / obatList.length).toFixed(1));
-  };
-
-  const calculateTotalValue = () => {
-    if (obatList.length === 0) return "0.00";
-    const total = obatList.reduce((acc, obat) => {
-      const price = parseFloat(obat.price.replace(/[^0-9.-]+/g, ""));
-      return acc + (isNaN(price) ? 0 : price);
-    }, 0);
-    return total.toFixed(2);
-  };
-
   if (loading) {
     return (
       <Layout>
@@ -94,8 +79,6 @@ export default function Dashboard() {
         userName={user?.email || ""}
         products={obatList}
         totalProducts={obatList.length}
-        averageRating={calculateAverageRating()}
-        totalValue={calculateTotalValue()}
       />
     </Layout>
   );
