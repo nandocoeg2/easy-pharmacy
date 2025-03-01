@@ -75,11 +75,7 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <DashboardTemplate
-        userName={user?.email || ""}
-        products={obatList}
-        totalProducts={obatList.length}
-      />
+      <DashboardTemplate userName={user?.email || ""} products={obatList} />
     </Layout>
   );
 }
