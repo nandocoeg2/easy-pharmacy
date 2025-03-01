@@ -1,11 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+export type SortOption =
+  | "name-asc"
+  | "name-desc"
+  | "price-asc"
+  | "price-desc"
+  | "";
 
 interface SearchState {
   query: string;
+  sortBy: SortOption;
 }
 
 const initialState: SearchState = {
   query: "",
+  sortBy: "",
 };
 
 const searchSlice = createSlice({
@@ -15,8 +23,11 @@ const searchSlice = createSlice({
     setSearchQuery: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
     },
+    setSortOption: (state, action: PayloadAction<SortOption>) => {
+      state.sortBy = action.payload;
+    },
   },
 });
 
-export const { setSearchQuery } = searchSlice.actions;
+export const { setSearchQuery, setSortOption } = searchSlice.actions;
 export default searchSlice.reducer;
