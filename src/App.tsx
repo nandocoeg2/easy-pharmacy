@@ -10,6 +10,7 @@ import DrugDetail from "./pages/DrugDetail";
 import LoadingSpinner from "./components/uis/LoadingSpinner";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import { Toaster } from "react-hot-toast";
+import Register from "./pages/Register";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(
@@ -47,6 +48,8 @@ function App() {
             />
             <Routes>
               <Route path="/" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+
               <Route
                 path="/dashboard"
                 element={

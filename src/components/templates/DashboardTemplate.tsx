@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { SearchInput, SortDropdown } from "../blocks";
+import { SortDropdown } from "../blocks";
 import { ProductGrid } from "../sections";
 
 interface ProductCardProps {

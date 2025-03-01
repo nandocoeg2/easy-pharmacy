@@ -1,19 +1,23 @@
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../stores/AuthSlice";
-import { Mail, Lock } from "lucide-react";
+import { Mail, Lock, AlertCircle } from "lucide-react";
 import { RootState } from "../stores/Store";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
+  const users = useSelector((state: RootState) => state.auth.users);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -23,7 +27,24 @@ function Login() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(login({ email }));
+    // Simple validation
+    if (!email || !password) {
+      setError("Please enter both email and password");
+      return;
+    }
+
+    // Check if user exists
+    const user = users.find((user) => user.email === email);
+    if (!user) {
+      setError("Invalid email or password");
+      return;
+    }
+
+    // In a real app, we would verify the password here
+    // For this demo, we'll just check if the user exists
+
+    dispatch(login({ email, name: user.name }));
+    toast.success("Login successful!");
     navigate("/dashboard");
   };
 
@@ -34,6 +55,13 @@ function Login() {
           <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
           <p className="text-gray-600 mt-2">Please sign in to your account</p>
         </div>
+
+        {error && (
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md flex items-start">
+            <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 mr-2 flex-shrink-0" />
+            <p className="text-sm text-red-600">{error}</p>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -81,6 +109,17 @@ function Login() {
             Sign in
           </button>
         </form>
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">
+            Don't have an account?{" "}
+            <Link
+              to="/register"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
